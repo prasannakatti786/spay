@@ -1,0 +1,58 @@
+version: "3"
+
+networks:
+  remit-wallet-network:
+    driver: bridge
+
+services:
+  postgres:
+    container_name: wallet-db
+    image: postgres
+    environment:
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - remit-wallet-network
+    restart: unless-stopped
+
+
+  wallet_server:
+    image: spondias/wallet-server:dev
+    networks:
+      - remit-wallet-network
+    container_name: wallet-backend
+    environment:
+      - ACTIVE_PROFILE=test
+      - DATABASE_URL=${DATABASE_URL}
+      - DATABASE_USERNAME=${DATABASE_USERNAME}
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
+      - PAYPAL_MODE=${PAYPAL_MODE}
+      - PAYPAL_CLIENT_ID=${PAYPAL_CLIENT_ID}
+      - PAYPAL_SECRET_KEY=${PAYPAL_SECRET_KEY}
+      - PAYPAL_REDIRECT_URL=${PAYPAL_REDIRECT_URL}
+      - MAIL_HOST=${MAIL_HOST}
+      - MAIL_USERNAME=${MAIL_USERNAME}
+      - MAIL_PASSWORD=${MAIL_PASSWORD}
+      - MAIL_PORT=${MAIL_PORT}
+      - JWT_SECRET=${JWT_SECRET}
+    expose:
+      - 6601
+    ports:
+      - "6601:6601"
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    links:
+      - postgres
+    volumes:
+      - backend:/root
+
+
+volumes:
+  postgres:
+  backend:

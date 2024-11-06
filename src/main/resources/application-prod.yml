@@ -1,0 +1,65 @@
+server:
+  port: 5500
+
+
+
+paypal:
+  mode: sandbox
+  client:
+    id: AaHuPz1ZfKb5XNDyCbaftqr3Qg-7rhkFYFZSMH_0b85-R6tEn-RVhe9BvyueLcHEDIVf-1M8whKG2_-v
+    secret: EFs2mF1CSGpbcRGUijLK189_rTGF3zUUOZI2geLUJtjsW2PpdNX8zal843Vsojliobc0H6PbbDw0a2yV
+  url:
+    server: http://localhost:5500
+    cancel: /transaction/paypal-payment-cancel
+    success: /transaction/paypal-payment-success
+
+
+
+
+
+spring:
+  datasource:
+    url: jdbc:postgresql://195.35.45.28:5432/shabel-wallet
+    password: testENV@Spondias
+    username: spondias
+
+  jpa:
+    database: postgresql
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  mail:
+    host: smtp.ionos.co.uk
+    username: abdirahman@spondias.com
+    password: Somalia#2023
+    properties:
+      mail:
+        smtp:
+          port: 587
+          auth: true
+          starttls:
+            enable: true
+            required: true
+        transport:
+          protocol: smtp
+
+wallet:
+  security:
+    tokenDuration: 20
+    jwtSecret: {}
+    allowedRoutes:
+      - /customer-registration
+      - /credential/login
+      - /api/v1/customer/micro_to_mono_registration
+      - /api/v1/micro_to_mono_apis_create_customer
+      - /credential/paypal
+      - /swagger-ui
+      - /v3/api-docs
+      - /transaction/paypal-payment-cancel
+      - /transaction/paypal-payment-success
+      - /transaction/paypal-payment-successs
+      - /transaction/create-paypal
+      - /favicon.ico
+      - /download/profile

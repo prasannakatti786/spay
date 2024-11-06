@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: Remit Wallet
+  servlet:
+    multipart:
+      max-file-size: 10MB
+  profiles:
+    active:
+      - dev
+
+wallet:
+  accountIdSuffix: SP
+  labelTemplate: Remit Wallet
+  receiver-template-message: sentAmount received senderNameSenderAccount to this receiverAccount, at transactionDate and reference number is refno
+  sender-template-message: sentAmount sent to receiverNameReceiverAccount from this senderAccount, at transactionDate and reference number is refno
+
+
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: API Documentation
+host: 'your-api-host.com'
+basePath: '/api'
+schemes:
+  - http
+paths:
+  /your/endpoint:
+    get:
+      summary: 'Your API Endpoint'
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: OK
+
+securityDefinitions:
+  BearerAuth:
+    type: apiKey
+    name: Authorization
+    in: header

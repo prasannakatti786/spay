@@ -1,0 +1,70 @@
+server:
+  port: 5501
+
+
+
+paypal:
+  mode: ${PAYPAL_MODE}
+  client:
+    id: ${PAYPAL_CLIENT_ID}
+    secret: ${PAYPAL_SECRET_KEY}
+  url:
+    server: ${PAYPAL_REDIRECT_URL}
+    cancel: /transaction/paypal-payment-cancel
+    success: /transaction/paypal-payment-success
+
+spring:
+  datasource:
+    url: ${DATABASE_URL}
+    password: ${DATABASE_PASSWORD}
+    username: ${DATABASE_USERNAME}
+
+  jpa:
+    database: postgresql
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+#  mail:
+#    host: ${MAIL_HOST}
+#    username: ${MAIL_USERNAME}
+#    password: ${MAIL_PASSWORD}
+#    properties:
+#      mail:
+#        smtp:
+#          port: ${MAIL_PORT}
+#          auth: true
+#          starttls:
+#            enable: true
+#            required: true
+#        transport:
+#          protocol: smtp
+
+wallet:
+  security:
+    tokenDuration: 14400
+    jwtSecret: ${JWT_SECRET}
+    allowedRoutes:
+      - /api/v1/customer-registration
+      - /api/v1/micro_to_mono_apis_create_customer
+      - /api/v1/customer/micro_to_mono_registration
+      - /api/v1/auth
+      - /swagger-ui
+      - /v3/api-docs
+      - /api/v1/transaction/paypal-payment-cancel
+      - /api/v1/transaction/paypal-payment-success
+      - /api/v1/transaction/paypal-payment-successs
+      - /api/v1/transaction/create-paypal
+      - /api/v1/download/profile
+      - /api/v1/download/profile-by-customer
+    allowedOrigins:
+      - http://localhost:3000
+      - http://localhost:3001
+      - http://195.35.45.28:3001
+      - http://45.87.80.188:3001
+  dev-account:
+    name: Nabil Osman
+    email: info@spondias.com
+    password: Asdf@Spondias@12
+    phoneNumber: +252000000000

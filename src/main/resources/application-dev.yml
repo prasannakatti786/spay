@@ -1,0 +1,75 @@
+server:
+  port: 6601
+
+wallet:
+  security:
+    tokenDuration: 1440
+    jwtSecret: dnjasjkdkasbfkjbaskjbfdiugwqiue023u981279839129uhehq98edh80wqcneqwcecqwu9cdvv2ebdyasbvf78e9rgq39r
+    allowedRoutes:
+      - /api/v1/customer-registration
+      - /api/v1/auth
+      - /api/v1/customer/micro_to_mono_registration
+      - /api/v1/micro_to_mono_apis_create_customer
+      - /api/v1/credential/paypal
+      - /swagger-ui
+      - /v3/api-docs
+      - /api/v1/transaction/paypal-payment-cancel
+      - /api/v1/transaction/paypal-payment-success
+      - /api/v1/transaction/paypal-payment-successs
+      - /api/v1/transaction/create-paypal
+      - /api/v1/download/profile
+    allowedOrigins:
+      - http://localhost:3000
+      - http://localhost:3001
+      - http://45.87.80.188:3001
+
+  dev-account:
+    name: Nabil Osman
+    email: info@spondias.com
+    password: Asdf@Spondias@12
+    phoneNumber: +252000000000
+
+paypal:
+  mode: sandbox
+  client:
+    id: AaHuPz1ZfKb5XNDyCbaftqr3Qg-7rhkFYFZSMH_0b85-R6tEn-RVhe9BvyueLcHEDIVf-1M8whKG2_-v
+    secret: EFs2mF1CSGpbcRGUijLK189_rTGF3zUUOZI2geLUJtjsW2PpdNX8zal843Vsojliobc0H6PbbDw0a2yV
+  url:
+    server: http://localhost:6601
+    cancel: /transaction/paypal-payment-cancel
+    success: /transaction/paypal-payment-success
+
+
+spring:
+  datasource:
+     url: jdbc:postgresql://localhost:5432/shabel_wallet
+#    url: jdbc:postgresql://195.35.45.28:5432/remit_exchange
+     password: root123
+     username: postgres
+  jpa:
+    database: postgresql
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+  mail:
+    host: smtp.ionos.co.uk
+    username: noreply@spondias.co.uk
+    password: Spay.com@Spondias
+    properties:
+      mail:
+        smtp:
+          port: 587
+          auth: true
+          starttls:
+            enable: true
+            required: true
+        transport:
+          protocol: smtp
+#  kafka:
+#    bootstrap-servers: 45.87.80.188:9092,45.87.80.188:9094
+
+
+
